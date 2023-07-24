@@ -1,0 +1,103 @@
+CURSO KAFKA
+
+github.com/bharaththippireddy
+
+https://github.com/bharaththippireddy/kafkaforjavadevelopers
+
+assignment1 :
+Go to kafka api and read ProducerRecord documentation
+https://kafka.apache.org/23/javadoc/org/apache/kafka/clients/producer/ProducerRecord.html
+
+kafka-topics --list --bootstrap-server localhost:9092
+
+sudo ./kafka-topics.sh --create --replication-factor 1 --partitions 1 --topic first-topic --bootstrap-server localhost:9092
+Created topic first-topic.
+sudo ./kafka-topics.sh --list --bootstrap-server localhost:9092
+first-topic
+
+export CONFLUENT_HOME=/home/romulo/confluent-7.4.0
+export PATH=$PATH:$CONFLUENT_HOME/bin
+confluent local service start
+
+http://localhost:8081/schemas    schemaRegistry
+
+
+Streams Commands
+
+kafka-topics --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-dataflow-input
+
+sh kafka-topics.sh --create     --bootstrap-server localhost:9092     --replication-factor 1     --partitions 1     --topic streams-dataflow-input
+
+kafka-topics --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-dataflow-output 
+
+sh kafka-topics.sh --create     --bootstrap-server localhost:9092     --replication-factor 1     --partitions 1     --topic streams-dataflow-output
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic streams-dataflow-input
+
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic streams-dataflow-input
+ 
+
+kafka-console-consumer --bootstrap-server localhost:9092 \
+    --topic streams-dataflow-output \
+    --property print.key=true \
+    --property print.value=true \
+    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+	
+	sh kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+    --topic streams-dataflow-output \
+    --property print.key=true \
+    --property print.value=true \
+    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+Word Count Demo:
+
+kafka-topics --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-wordcount-input
+	
+	sh kafka-topics.sh --create     --bootstrap-server localhost:9092     --replication-factor 1     --partitions 1     --topic streams-wordcount-input
+
+kafka-topics --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-wordcount-output 
+	
+	sh kafka-topics.sh --create     --bootstrap-server localhost:9092     --replication-factor 1     --partitions 1     --topic streams-wordcount-output
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic streams-wordcount-input
+
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic streams-wordcount-input
+
+kafka-console-consumer --bootstrap-server localhost:9092 \
+    --topic streams-wordcount-output \
+    --from-beginning \
+    --property print.key=true \
+    --property print.value=true \
+    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+	
+	sh kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+    --topic streams-wordcount-output \
+    --from-beginning \
+    --property print.key=true \
+    --property print.value=true \
+    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+	
+	apple banana apple banana orange apple orange banana orange 
+	
+	
+https://github.com/romulobb/KafkaExamples.git
